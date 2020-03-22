@@ -7,7 +7,7 @@ typedef nx_struct radio_msg {
 } radio_msg_t;
 
 enum {
-  AM_RADIO_COUNT_MSG = 6,
+  AM_RADIO_MSG = 6,
 };
 
 #endif

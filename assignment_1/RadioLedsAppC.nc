@@ -3,8 +3,8 @@
 configuration RadioLedsAppC {}
 implementation {
   components MainC, RadioLedsC as App, LedsC;
-  components new AMSenderC(AM_RADIO_COUNT_MSG);
-  components new AMReceiverC(AM_RADIO_COUNT_MSG);
+  components new AMSenderC(AM_RADIO_MSG);
+  components new AMReceiverC(AM_RADIO_MSG);
   components new TimerMilliC();
   components ActiveMessageC;
   
