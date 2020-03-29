@@ -93,7 +93,7 @@ DEBUG (1): >>>Pack
 	 Payload Sent
 		 counter: 6 
 		 type: 1 
-DEBUG (2): Received packet at time 0:0:5.862548819
+DEBUG (2): Received packet at time 0:0:5.862319939
 DEBUG (2):  Payload length 4 
 DEBUG (2): >>>Pack 
 		 Payload Received
@@ -109,13 +109,14 @@ DEBUG (2): >>>Pack
 		 counter: 6 
 		 type: 2 
 		 value: 50421 
-DEBUG (1): Received packet at time 0:0:5.876892071
+DEBUG (1): Received packet at time 0:0:5.881835890
 DEBUG (1):  Payload length 4 
 DEBUG (1): >>>Pack 
 		 Payload Received
 		 counter: 6 
 		 type: 2 
 		 value: 50421 
+DEBUG (2): Ack received! :)
 DEBUG (2): Data sent correctly.
 
 

@@ -130,8 +130,8 @@ module sendAckC {
 	 */
 	 if(err == SUCCESS){
 		 if(call PacketAcknowledgements.wasAcked(buf)){
+		 	dbg("radio_ack", "Ack received! :)\n");
 		 	if(TOS_NODE_ID == 1) {
-		 		dbg("radio_ack", "Ack received! :)\n");
 		 		call MilliTimer.stop();
 		 		dbg("timer", "Stopped timer\n");
 		 	}
