@@ -1,0 +1,219 @@
+[
+    {
+        "id": "b5d1af96.0416f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e10d7aaf.360f28",
+        "type": "inject",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "bd81d0cd.8a02d"
+            ]
+        ]
+    },
+    {
+        "id": "bd81d0cd.8a02d",
+        "type": "file in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "filename": "/home/user/Desktop/traffic.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "cffa9213.fe93e8"
+            ]
+        ]
+    },
+    {
+        "id": "cffa9213.fe93e8",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "split",
+        "func": "var words = msg.payload.split(\"\\n\");\nvar outputmsg = [];\n\nfor(var i in words){\n    var newwords = words[i].split(/[, ]/);\n    var appoggio = [];\n    var publish = false;\n    \n    for(var nw in newwords){\n        if(newwords[nw] !== \"\"){\n            if(newwords[nw] === \"Message\"){\n                if(newwords[nw-1] === \"Publish\")\n                    publish = true;\n            }\n            appoggio.push(newwords[nw]);\n        }\n    }\n    \n    if(publish){\n        outputmsg.push({\n             payload: appoggio\n        })\n    }\n}\n\nreturn [outputmsg];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "341f2caa.df9c4c",
+                "826bf1a1.e3d0f"
+            ]
+        ]
+    },
+    {
+        "id": "341f2caa.df9c4c",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "topic_filter_2",
+        "func": "var outputmsg;\nvar filtered = false;\nvar i = 0;\nwhile(!filtered && i < msg.payload.length){\n    if(msg.payload[i] === \"[factory/department1/section1/hydraulic_valve]\" || \n                    msg.payload[i] === \"[factory/department3/section3/hydraulic_valve]\"){\n        filtered = true;\n    }\n    i++;\n}\nif (filtered){\n    const buf = new Buffer(msg.payload[msg.payload.length-1], 'hex');\n    var obj = JSON.parse(buf.toString());\n    outputmsg = {\n        payload: \"field2=\"+obj.value+\"&status=MQTTPUBLISH\"\n    }\n}\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 260,
+        "wires": [
+            [
+                "4fff8a58.d0aaac"
+            ]
+        ]
+    },
+    {
+        "id": "dc12e278.a1f9a8",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "topic_filter_2_dbg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 770,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "826bf1a1.e3d0f",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "topic_filter_1",
+        "func": "var outputmsg;\nvar filtered = false;\nvar i = 0;\nwhile(!filtered && i < msg.payload.length){\n    if(msg.payload[i] === \"[factory/department1/section1/plc]\" || \n                    msg.payload[i] === \"[factory/department3/section3/plc]\"){\n        filtered = true;\n    }\n    i++;\n}\nif (filtered){\n    const buf = new Buffer(msg.payload[msg.payload.length-1], 'hex');\n    var obj = JSON.parse(buf.toString());\n    outputmsg = {\n        payload: \"field1=\"+obj.value+\"&status=MQTTPUBLISH\"\n    }\n}\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "80352a57.b5e74"
+            ]
+        ]
+    },
+    {
+        "id": "ad025bda.e78418",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "topic_filter_1_dbg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 770,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "80352a57.b5e74",
+        "type": "delay",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "45",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "e9314ef8.60c88",
+                "ad025bda.e78418"
+            ]
+        ]
+    },
+    {
+        "id": "4fff8a58.d0aaac",
+        "type": "delay",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "45",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 540,
+        "y": 260,
+        "wires": [
+            [
+                "dc12e278.a1f9a8",
+                "ae2f9ff5.53a36"
+            ]
+        ]
+    },
+    {
+        "id": "e9314ef8.60c88",
+        "type": "mqtt out",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "topic": "channels/1066030/publish/4FUU9AQAG96IV8LQ",
+        "qos": "0",
+        "retain": "",
+        "broker": "9bf06b37.2a9bd",
+        "x": 910,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ae2f9ff5.53a36",
+        "type": "mqtt out",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "topic": "channels/1066030/publish/4FUU9AQAG96IV8LQ",
+        "qos": "0",
+        "retain": "",
+        "broker": "9bf06b37.2a9bd",
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9bf06b37.2a9bd",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "mqtt.thingspeak.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
