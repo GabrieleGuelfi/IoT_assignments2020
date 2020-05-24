@@ -30,12 +30,12 @@
         "id": "bd81d0cd.8a02d",
         "type": "file in",
         "z": "b5d1af96.0416f8",
-        "name": "",
+        "name": "file_node",
         "filename": "/home/user/Desktop/traffic.csv",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 350,
+        "x": 280,
         "y": 60,
         "wires": [
             [
@@ -51,8 +51,8 @@
         "func": "var words = msg.payload.split(\"\\n\");\nvar outputmsg = [];\n\nfor(var i in words){\n    var newwords = words[i].split(/[, ]/);\n    var appoggio = [];\n    var publish = false;\n    \n    for(var nw in newwords){\n        if(newwords[nw] !== \"\"){\n            if(newwords[nw] === \"Message\"){\n                if(newwords[nw-1] === \"Publish\")\n                    publish = true;\n            }\n            appoggio.push(newwords[nw]);\n        }\n    }\n    \n    if(publish){\n        outputmsg.push({\n             payload: appoggio\n        })\n    }\n}\n\nreturn [outputmsg];",
         "outputs": 1,
         "noerr": 0,
-        "x": 110,
-        "y": 180,
+        "x": 130,
+        "y": 220,
         "wires": [
             [
                 "341f2caa.df9c4c",
@@ -72,7 +72,7 @@
         "y": 260,
         "wires": [
             [
-                "4fff8a58.d0aaac"
+                "6f317521.5f77f4"
             ]
         ]
     },
@@ -117,7 +117,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 770,
-        "y": 80,
+        "y": 140,
         "wires": []
     },
     {
@@ -129,8 +129,8 @@
         "timeout": "10",
         "timeoutUnits": "seconds",
         "rate": "1",
-        "nbRateUnits": "45",
-        "rateUnits": "second",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
@@ -153,18 +153,18 @@
         "timeout": "5",
         "timeoutUnits": "seconds",
         "rate": "1",
-        "nbRateUnits": "45",
-        "rateUnits": "second",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
         "x": 540,
-        "y": 260,
+        "y": 340,
         "wires": [
             [
                 "dc12e278.a1f9a8",
-                "ae2f9ff5.53a36"
+                "e9314ef8.60c88"
             ]
         ]
     },
@@ -172,27 +172,37 @@
         "id": "e9314ef8.60c88",
         "type": "mqtt out",
         "z": "b5d1af96.0416f8",
-        "name": "",
+        "name": "publisher",
         "topic": "channels/1066030/publish/4FUU9AQAG96IV8LQ",
         "qos": "0",
         "retain": "",
         "broker": "9bf06b37.2a9bd",
-        "x": 910,
-        "y": 180,
+        "x": 740,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "ae2f9ff5.53a36",
-        "type": "mqtt out",
+        "id": "6f317521.5f77f4",
+        "type": "delay",
         "z": "b5d1af96.0416f8",
         "name": "",
-        "topic": "channels/1066030/publish/4FUU9AQAG96IV8LQ",
-        "qos": "0",
-        "retain": "",
-        "broker": "9bf06b37.2a9bd",
-        "x": 910,
-        "y": 260,
-        "wires": []
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "4fff8a58.d0aaac"
+            ]
+        ]
     },
     {
         "id": "9bf06b37.2a9bd",
