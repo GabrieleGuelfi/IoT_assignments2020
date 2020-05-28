@@ -1,0 +1,6 @@
+### NesC ###
+# telosB build folder
+build/
+# micazed build folder
+simbuild/
+

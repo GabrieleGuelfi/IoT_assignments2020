@@ -1,0 +1,119 @@
+[
+    {
+        "id": "b5d1af96.0416f8",
+        "type": "tab",
+        "label": "assignment_5",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a30f5d68.ceffc",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "43ca3f1e.2088b8"
+            ]
+        ]
+    },
+    {
+        "id": "43ca3f1e.2088b8",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "filter",
+        "func": "var outputmsg;\nvar obj = JSON.parse(msg.payload);\nif(obj.value <= 70)\n    outputmsg = {\n        payload: \"field\"+(obj.topic-1)+\"=\"+obj.value+\"&status=MQTTPUBLISH\"\n    }\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "743b8314.4340e4"
+            ]
+        ]
+    },
+    {
+        "id": "4b1ca428.20788c",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "filtered_dbg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "743b8314.4340e4",
+        "type": "delay",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "25",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 500,
+        "y": 60,
+        "wires": [
+            [
+                "16de4546.9256bb",
+                "4b1ca428.20788c"
+            ]
+        ]
+    },
+    {
+        "id": "16de4546.9256bb",
+        "type": "mqtt out",
+        "z": "b5d1af96.0416f8",
+        "name": "publisher",
+        "topic": "channels/1070239/publish/I3DJGO4YYLP9RZEK",
+        "qos": "0",
+        "retain": "",
+        "broker": "f31f5bfd.e044d8",
+        "x": 780,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f31f5bfd.e044d8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "mqtt.thingspeak.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
