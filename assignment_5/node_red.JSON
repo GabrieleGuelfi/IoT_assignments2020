@@ -10,7 +10,7 @@
         "id": "a30f5d68.ceffc",
         "type": "tcp in",
         "z": "b5d1af96.0416f8",
-        "name": "",
+        "name": "TCP_node",
         "server": "client",
         "host": "localhost",
         "port": "60001",
@@ -19,7 +19,7 @@
         "newline": "\\n",
         "topic": "",
         "base64": false,
-        "x": 130,
+        "x": 80,
         "y": 60,
         "wires": [
             [
@@ -35,7 +35,7 @@
         "func": "var outputmsg;\nvar obj = JSON.parse(msg.payload);\nif(obj.value <= 70)\n    outputmsg = {\n        payload: \"field\"+(obj.topic-1)+\"=\"+obj.value+\"&status=MQTTPUBLISH\"\n    }\nreturn outputmsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 310,
+        "x": 230,
         "y": 60,
         "wires": [
             [
@@ -53,8 +53,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 710,
-        "y": 140,
+        "x": 590,
+        "y": 120,
         "wires": []
     },
     {
@@ -72,7 +72,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 500,
+        "x": 400,
         "y": 60,
         "wires": [
             [
@@ -90,7 +90,7 @@
         "qos": "0",
         "retain": "",
         "broker": "f31f5bfd.e044d8",
-        "x": 780,
+        "x": 580,
         "y": 60,
         "wires": []
     },
