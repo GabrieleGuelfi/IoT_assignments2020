@@ -4,3 +4,4 @@ mail Longo:
 	
 salvare mote vicini e quindi non spammare notifiche
 quando cancellare mote vicino?
+tossim?
