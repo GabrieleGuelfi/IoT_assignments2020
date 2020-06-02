@@ -1,0 +1,217 @@
+[
+    {
+        "id": "f3d9c9f6.039548",
+        "type": "tab",
+        "label": "final_project",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "27360d3.60f7f72",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "b9ace7a.c401018"
+            ]
+        ]
+    },
+    {
+        "id": "fe4889d7.bc9188",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60002",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "7455981d.a610e"
+            ]
+        ]
+    },
+    {
+        "id": "aaf767a5.c572e8",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60003",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "e73850f.5801d3"
+            ]
+        ]
+    },
+    {
+        "id": "847042bc.02ef08",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60004",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "5237891c.50d37"
+            ]
+        ]
+    },
+    {
+        "id": "d5487af5.1feda",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60005",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "777bab67.69f6ac"
+            ]
+        ]
+    },
+    {
+        "id": "379aac0e.75f77c",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 660,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7455981d.a610e",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 340,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e73850f.5801d3",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 340,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5237891c.50d37",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 340,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "777bab67.69f6ac",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 320,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "955ce139.eaab5",
+        "type": "http request",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
+        "tls": "",
+        "x": 490,
+        "y": 40,
+        "wires": [
+            [
+                "379aac0e.75f77c"
+            ]
+        ]
+    },
+    {
+        "id": "b9ace7a.c401018",
+        "type": "function",
+        "z": "f3d9c9f6.039548",
+        "name": "params",
+        "func": "var outputmsg = {\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 40,
+        "wires": [
+            [
+                "955ce139.eaab5"
+            ]
+        ]
+    }
+]
