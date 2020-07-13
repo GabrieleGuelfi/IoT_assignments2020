@@ -1,6 +1,1 @@
-mail Longo:
-	1) calcolare distanza come?
-	2) come testa IFTTT? nuovo account con credenziali che gli diamo?
-	
-salvare mote vicini e quindi non spammare notifiche
-quando cancellare mote vicino?
+TOSSIM

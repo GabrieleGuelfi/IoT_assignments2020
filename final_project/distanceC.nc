@@ -23,7 +23,9 @@ module distanceC {
 
   message_t packet; 
 	bool locked;
-
+	
+	
+	
   //***************** Boot interface ********************//
   event void Boot.booted() {
 		call SplitControl.start();
@@ -64,10 +66,10 @@ module distanceC {
   //********************* AMSend interface ****************//
   event void AMSend.sendDone(message_t* buf,error_t err) {
 	//This event is triggered when a message is sent
-	 	if (&packet == buf) {
-      locked = FALSE;
-    }
-  }
+		if (&packet == buf) {
+				locked = FALSE;
+		}
+	}
   
 
   //***************************** Receive interface *****************//
@@ -76,12 +78,13 @@ module distanceC {
 	 *
 	 * print the message
 	 */
- 		if (len != sizeof(my_msg_t)) {return buf;}
-    else {
-  		my_msg_t* mm = (my_msg_t*)payload;
-	  	printf("{\"value1\": %u}\n", mm->ID);
+	 	
+		if (len != sizeof(my_msg_t)) {return buf;}
+	  else {
+			my_msg_t* mm = (my_msg_t*)payload;
+			printf("{\"value1\": %u, \"value2\": %u}\n", mm->ID, TOS_NODE_ID);
 			printfflush();
-  		return buf;
+			return buf;
 		}
   }
   

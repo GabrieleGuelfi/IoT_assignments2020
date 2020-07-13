@@ -28,90 +28,6 @@
         ]
     },
     {
-        "id": "fe4889d7.bc9188",
-        "type": "tcp in",
-        "z": "f3d9c9f6.039548",
-        "name": "",
-        "server": "client",
-        "host": "localhost",
-        "port": "60002",
-        "datamode": "stream",
-        "datatype": "utf8",
-        "newline": "\\n",
-        "topic": "",
-        "base64": false,
-        "x": 130,
-        "y": 240,
-        "wires": [
-            [
-                "7455981d.a610e"
-            ]
-        ]
-    },
-    {
-        "id": "aaf767a5.c572e8",
-        "type": "tcp in",
-        "z": "f3d9c9f6.039548",
-        "name": "",
-        "server": "client",
-        "host": "localhost",
-        "port": "60003",
-        "datamode": "stream",
-        "datatype": "utf8",
-        "newline": "\\n",
-        "topic": "",
-        "base64": false,
-        "x": 130,
-        "y": 300,
-        "wires": [
-            [
-                "e73850f.5801d3"
-            ]
-        ]
-    },
-    {
-        "id": "847042bc.02ef08",
-        "type": "tcp in",
-        "z": "f3d9c9f6.039548",
-        "name": "",
-        "server": "client",
-        "host": "localhost",
-        "port": "60004",
-        "datamode": "stream",
-        "datatype": "utf8",
-        "newline": "\\n",
-        "topic": "",
-        "base64": false,
-        "x": 130,
-        "y": 360,
-        "wires": [
-            [
-                "5237891c.50d37"
-            ]
-        ]
-    },
-    {
-        "id": "d5487af5.1feda",
-        "type": "tcp in",
-        "z": "f3d9c9f6.039548",
-        "name": "",
-        "server": "client",
-        "host": "localhost",
-        "port": "60005",
-        "datamode": "stream",
-        "datatype": "utf8",
-        "newline": "\\n",
-        "topic": "",
-        "base64": false,
-        "x": 130,
-        "y": 420,
-        "wires": [
-            [
-                "777bab67.69f6ac"
-            ]
-        ]
-    },
-    {
         "id": "379aac0e.75f77c",
         "type": "debug",
         "z": "f3d9c9f6.039548",
@@ -121,64 +37,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 660,
+        "x": 980,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "7455981d.a610e",
-        "type": "debug",
-        "z": "f3d9c9f6.039548",
-        "name": "mote#2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 340,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "e73850f.5801d3",
-        "type": "debug",
-        "z": "f3d9c9f6.039548",
-        "name": "mote#3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 340,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "5237891c.50d37",
-        "type": "debug",
-        "z": "f3d9c9f6.039548",
-        "name": "mote#4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 340,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "777bab67.69f6ac",
-        "type": "debug",
-        "z": "f3d9c9f6.039548",
-        "name": "mote#5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 320,
-        "y": 420,
         "wires": []
     },
     {
@@ -190,7 +50,7 @@
         "ret": "txt",
         "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
         "tls": "",
-        "x": 490,
+        "x": 810,
         "y": 40,
         "wires": [
             [
@@ -203,14 +63,516 @@
         "type": "function",
         "z": "f3d9c9f6.039548",
         "name": "params",
-        "func": "var outputmsg = {\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "func": "var outputmsg = {\n    topic: JSON.parse(msg.payload).value1,\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 40,
         "wires": [
             [
+                "3cc42f25.e06728"
+            ]
+        ]
+    },
+    {
+        "id": "3cc42f25.e06728",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 480,
+        "y": 40,
+        "wires": [
+            [
+                "5ba9dec0.670588"
+            ]
+        ]
+    },
+    {
+        "id": "5ba9dec0.670588",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 40,
+        "wires": [
+            [
                 "955ce139.eaab5"
+            ]
+        ]
+    },
+    {
+        "id": "2b53f72a.2cd5b",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60002",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "626ca80b.864498"
+            ]
+        ]
+    },
+    {
+        "id": "af7202f9.be8d98",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 980,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8e636a10.35e678",
+        "type": "http request",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
+        "tls": "",
+        "x": 810,
+        "y": 100,
+        "wires": [
+            [
+                "af7202f9.be8d98"
+            ]
+        ]
+    },
+    {
+        "id": "626ca80b.864498",
+        "type": "function",
+        "z": "f3d9c9f6.039548",
+        "name": "params",
+        "func": "var outputmsg = {\n    topic: JSON.parse(msg.payload).value1,\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "5acdacba.93ecc4"
+            ]
+        ]
+    },
+    {
+        "id": "5acdacba.93ecc4",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 480,
+        "y": 100,
+        "wires": [
+            [
+                "9eff1b35.895b4"
+            ]
+        ]
+    },
+    {
+        "id": "9eff1b35.895b4",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 100,
+        "wires": [
+            [
+                "8e636a10.35e678"
+            ]
+        ]
+    },
+    {
+        "id": "cfaa3a57.5372e8",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60003",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "df54cc16.ff2f98"
+            ]
+        ]
+    },
+    {
+        "id": "a80b5ca1.740ca8",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 980,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a83a8af.63a6e78",
+        "type": "http request",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
+        "tls": "",
+        "x": 810,
+        "y": 160,
+        "wires": [
+            [
+                "a80b5ca1.740ca8"
+            ]
+        ]
+    },
+    {
+        "id": "df54cc16.ff2f98",
+        "type": "function",
+        "z": "f3d9c9f6.039548",
+        "name": "params",
+        "func": "var outputmsg = {\n    topic: JSON.parse(msg.payload).value1,\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "4e7974ae.4b8264"
+            ]
+        ]
+    },
+    {
+        "id": "4e7974ae.4b8264",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "b7fb5f09.bb2598"
+            ]
+        ]
+    },
+    {
+        "id": "b7fb5f09.bb2598",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 160,
+        "wires": [
+            [
+                "a83a8af.63a6e78"
+            ]
+        ]
+    },
+    {
+        "id": "a88299ca.bfe7b8",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60004",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "d50bf498.a3a318"
+            ]
+        ]
+    },
+    {
+        "id": "db3114e0.f70848",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 980,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ebce2608.c17f38",
+        "type": "http request",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
+        "tls": "",
+        "x": 810,
+        "y": 220,
+        "wires": [
+            [
+                "db3114e0.f70848"
+            ]
+        ]
+    },
+    {
+        "id": "d50bf498.a3a318",
+        "type": "function",
+        "z": "f3d9c9f6.039548",
+        "name": "params",
+        "func": "var outputmsg = {\n    topic: JSON.parse(msg.payload).value1,\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "975e39b8.0691f"
+            ]
+        ]
+    },
+    {
+        "id": "975e39b8.0691f",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "6aa82eed.8c86d8"
+            ]
+        ]
+    },
+    {
+        "id": "6aa82eed.8c86d8",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "ebce2608.c17f38"
+            ]
+        ]
+    },
+    {
+        "id": "c6cd2bd6.40da9",
+        "type": "tcp in",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60005",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "6fb1cc38.960abc"
+            ]
+        ]
+    },
+    {
+        "id": "61f3327c.316f74",
+        "type": "debug",
+        "z": "f3d9c9f6.039548",
+        "name": "mote#5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 980,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "52f3c79a.620ef",
+        "type": "http request",
+        "z": "f3d9c9f6.039548",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/distance_alarm/with/key/rLYZ_UpLa3UsOj6aPuBTO",
+        "tls": "",
+        "x": 810,
+        "y": 280,
+        "wires": [
+            [
+                "61f3327c.316f74"
+            ]
+        ]
+    },
+    {
+        "id": "6fb1cc38.960abc",
+        "type": "function",
+        "z": "f3d9c9f6.039548",
+        "name": "params",
+        "func": "var outputmsg = {\n    topic: JSON.parse(msg.payload).value1,\n    payload: JSON.parse(msg.payload)\n};\nreturn outputmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "6722d2ed.4078dc"
+            ]
+        ]
+    },
+    {
+        "id": "6722d2ed.4078dc",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "timed",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 480,
+        "y": 280,
+        "wires": [
+            [
+                "eee0a37a.d8b1e8"
+            ]
+        ]
+    },
+    {
+        "id": "eee0a37a.d8b1e8",
+        "type": "delay",
+        "z": "f3d9c9f6.039548",
+        "name": "rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "52f3c79a.620ef"
             ]
         ]
     }
