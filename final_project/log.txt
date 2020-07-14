@@ -1,0 +1,91 @@
+TIMESTAMP	MOTE_ID MESSAGE(sender, receiver)
+
+//Scenario 1: motes #3 and #2 are close
+00:07.258	ID:3	{"value1": 2, "value2": 3}
+00:07.434	ID:2	{"value1": 3, "value2": 2}
+00:07.749	ID:3	{"value1": 2, "value2": 3}
+00:07.923	ID:2	{"value1": 3, "value2": 2}
+00:08.240	ID:3	{"value1": 2, "value2": 3}
+00:08.408	ID:2	{"value1": 3, "value2": 2}
+
+//Scenario 2: motes #1, #4 and #5 are close; motes #3 and #2 are still close but separated from the others
+00:08.716	ID:1	{"value1": 5, "value2": 1}
+00:08.716	ID:4	{"value1": 5, "value2": 4}
+00:08.721	ID:3	{"value1": 2, "value2": 3}
+00:08.834	ID:1	{"value1": 4, "value2": 1}
+00:08.834	ID:5	{"value1": 4, "value2": 5}
+00:08.867	ID:4	{"value1": 1, "value2": 4}
+00:08.867	ID:5	{"value1": 1, "value2": 5}
+00:08.896	ID:2	{"value1": 3, "value2": 2}
+00:09.207	ID:4	{"value1": 5, "value2": 4}
+00:09.207	ID:1	{"value1": 5, "value2": 1}
+00:09.215	ID:3	{"value1": 2, "value2": 3}
+00:09.328	ID:1	{"value1": 4, "value2": 1}
+00:09.328	ID:5	{"value1": 4, "value2": 5}
+00:09.356	ID:5	{"value1": 1, "value2": 5}
+00:09.356	ID:4	{"value1": 1, "value2": 4}
+00:09.385	ID:2	{"value1": 3, "value2": 2}
+00:09.691	ID:4	{"value1": 5, "value2": 4}
+00:09.691	ID:1	{"value1": 5, "value2": 1}
+00:09.703	ID:3	{"value1": 2, "value2": 3}
+00:09.812	ID:1	{"value1": 4, "value2": 1}
+00:09.812	ID:5	{"value1": 4, "value2": 5}
+00:09.849	ID:5	{"value1": 1, "value2": 5}
+00:09.849	ID:4	{"value1": 1, "value2": 4}
+00:09.874	ID:2	{"value1": 3, "value2": 2}
+
+//Scenario 3: motes #1, #4 and #5 are close; motes #3 and #5 are now close; mote #2 is alone 
+00:10.184	ID:1	{"value1": 5, "value2": 1}
+00:10.184	ID:4	{"value1": 5, "value2": 4}
+00:10.184	ID:3	{"value1": 5, "value2": 3}
+00:10.304	ID:1	{"value1": 4, "value2": 1}
+00:10.304	ID:5	{"value1": 4, "value2": 5}
+00:10.338	ID:5	{"value1": 1, "value2": 5}
+00:10.338	ID:4	{"value1": 1, "value2": 4}
+00:10.363	ID:5	{"value1": 3, "value2": 5}
+00:10.670	ID:1	{"value1": 5, "value2": 1}
+00:10.670	ID:3	{"value1": 5, "value2": 3}
+00:10.670	ID:4	{"value1": 5, "value2": 4}
+00:10.792	ID:1	{"value1": 4, "value2": 1}
+00:10.792	ID:5	{"value1": 4, "value2": 5}
+00:10.826	ID:5	{"value1": 1, "value2": 5}
+00:10.826	ID:4	{"value1": 1, "value2": 4}
+00:10.851	ID:5	{"value1": 3, "value2": 5}
+00:11.161	ID:1	{"value1": 5, "value2": 1}
+00:11.161	ID:3	{"value1": 5, "value2": 3}
+00:11.161	ID:4	{"value1": 5, "value2": 4}
+00:11.277	ID:1	{"value1": 4, "value2": 1}
+00:11.277	ID:5	{"value1": 4, "value2": 5}
+00:11.315	ID:5	{"value1": 1, "value2": 5}
+00:11.315	ID:4	{"value1": 1, "value2": 4}
+00:11.340	ID:5	{"value1": 3, "value2": 5}
+
+//Scenario 4: motes #1, #4 and #5 are close; motes #3 and #5 are close; mote #2 and #3 are close
+00:11.645	ID:1	{"value1": 5, "value2": 1}
+00:11.645	ID:3	{"value1": 5, "value2": 3}
+00:11.645	ID:4	{"value1": 5, "value2": 4}
+00:11.652	ID:3	{"value1": 2, "value2": 3}
+00:11.768	ID:1	{"value1": 4, "value2": 1}
+00:11.768	ID:5	{"value1": 4, "value2": 5}
+00:11.805	ID:5	{"value1": 1, "value2": 5}
+00:11.805	ID:4	{"value1": 1, "value2": 4}
+00:11.826	ID:2	{"value1": 3, "value2": 2}
+00:11.826	ID:5	{"value1": 3, "value2": 5}
+00:12.132	ID:1	{"value1": 5, "value2": 1}
+00:12.132	ID:3	{"value1": 5, "value2": 3}
+00:12.132	ID:4	{"value1": 5, "value2": 4}
+00:12.148	ID:3	{"value1": 2, "value2": 3}
+00:12.259	ID:1	{"value1": 4, "value2": 1}
+00:12.259	ID:5	{"value1": 4, "value2": 5}
+00:12.287	ID:5	{"value1": 1, "value2": 5}
+00:12.287	ID:4	{"value1": 1, "value2": 4}
+00:12.317	ID:2	{"value1": 3, "value2": 2}
+00:12.317	ID:5	{"value1": 3, "value2": 5}
+00:12.622	ID:1	{"value1": 5, "value2": 1}
+00:12.622	ID:3	{"value1": 5, "value2": 3}
+00:12.622	ID:4	{"value1": 5, "value2": 4}
+00:12.631	ID:3	{"value1": 2, "value2": 3}
+00:12.742	ID:1	{"value1": 4, "value2": 1}
+00:12.742	ID:5	{"value1": 4, "value2": 5}
+00:12.776	ID:5	{"value1": 1, "value2": 5}
+00:12.776	ID:4	{"value1": 1, "value2": 4}

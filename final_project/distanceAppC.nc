@@ -13,7 +13,6 @@ implementation {
 	components new TimerMilliC();
 	components ActiveMessageC;
 	components SerialPrintfC;
-	components RandomC;
 
 /****** INTERFACES *****/
 
@@ -28,8 +27,6 @@ implementation {
 	App.Packet -> AMSenderC;
 	//Timer interface
 	App.MilliTimer -> TimerMilliC;
-	//Random interface
-	App.Random -> RandomC;
 
 }
 

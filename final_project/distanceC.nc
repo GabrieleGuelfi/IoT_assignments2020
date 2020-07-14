@@ -15,19 +15,15 @@ module distanceC {
 		interface Packet;
 		//interface for timer
 		interface Timer<TMilli> as MilliTimer;
-		//Random number
-		interface Random;
   }
 
 } implementation {
 
-  message_t packet; 
+	message_t packet; 
 	bool locked;
 	
-	
-	
   //***************** Boot interface ********************//
-  event void Boot.booted() {
+	event void Boot.booted() {
 		call SplitControl.start();
   }
 
@@ -49,7 +45,7 @@ module distanceC {
   //***************** MilliTimer interface ********************//
 	event void MilliTimer.fired() {
 	/* This event is triggered every time the timer fires.
-	 * When the timer fires, we send a random number to mote#1
+	 * Every mote broadcast its own ID.
 	 */
 		my_msg_t* mm = (my_msg_t*)(call Packet.getPayload(&packet, sizeof(my_msg_t)));
 		if (mm == NULL) {
@@ -60,9 +56,8 @@ module distanceC {
 		if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(my_msg_t)) == SUCCESS) {
 			locked = TRUE;
 		}
-  }
-  
-
+	}
+	 
   //********************* AMSend interface ****************//
   event void AMSend.sendDone(message_t* buf,error_t err) {
 	//This event is triggered when a message is sent
@@ -70,13 +65,12 @@ module distanceC {
 				locked = FALSE;
 		}
 	}
-  
 
   //***************************** Receive interface *****************//
   event message_t* Receive.receive(message_t* buf,void* payload, uint8_t len) {
 	/* This event is triggered when a message is received 
 	 *
-	 * print the message
+	 * Print the message on the serial port.
 	 */
 	 	
 		if (len != sizeof(my_msg_t)) {return buf;}
